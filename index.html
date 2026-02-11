@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>2 minutes dans mon cœur ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(#1a002b,#3b004f);
+  color:white;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+/* SECTIONS */
+.section{
+  display:none;
+  width:100%;
+  height:100%;
+  padding:20px;
+  animation:fade 1.5s forwards;
+}
+.active{display:flex;flex-direction:column;justify-content:center;align-items:center}
+
+@keyframes fade{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+/* BOUTONS */
+button{
+  margin-top:25px;
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
+}
+.primary{background:#ff4d6d;color:white}
+.danger{background:#999;color:black}
+
+/* COEUR */
+.heart{
+  font-size:90px;
+  animation:beat 1.5s infinite;
+  cursor:pointer;
+}
+@keyframes beat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+}
+
+/* LETTRE */
+.letter{
+  background:rgba(0,0,0,0.55);
+  border-radius:20px;
+  padding:25px;
+  max-width:80%;
+  text-align:center;
+}
+
+/* TEXTE QUI MONTE */
+.scroll-text{
+  animation:scrollUp 90s linear forwards;
+}
+@keyframes scrollUp{
+  from{transform:translateY(200px);opacity:1}
+  to{transform:translateY(-300px);opacity:0}
+}
+
+/* FINAL PHOTO */
+.final{
+  background:url("image/photo.jpg.JPG") center/cover no-repeat;
+}
+
+/* PLUIE DE COEURS */
+.fall{
+  position:absolute;
+  top:-10px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIQUE UNIQUE -->
+<audio id="music" loop>
+  <source src="musique.mp3/musique.mp3.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 1 -->
+<div class="section active" id="s1">
+  <h2>BONSOIR BB ❤️</h2>
+  <p>Respire doucement…<br>Ce site est pour toi.</p>
+  <button class="primary" onclick="next(2,true)">Continuer</button>
+</div>
+
+<!-- 2 -->
+<div class="section" id="s2">
+  <div class="heart" onclick="next(3)">❤️</div>
+  <p>Chaque battement pense à toi… et clique sur le COEUR</p>
+</div>
+
+<!-- 3 -->
+<div class="section" id="s3">
+  <div class="letter">
+    <p>
+Mon amour,<br><br>
+Tu me manques plus que les mots ne peuvent le dire.  
+Même loin, tu es toujours dans mon cœur et dans mes pensées.  
+Je te choisis aujourd’hui, demain et pour toujours.<br><br>
+❤️
+    </p>
+  </div>
+  <button class="primary" onclick="next(4)">Continuer</button>
+</div>
+
+<!-- 4 QUESTION -->
+<div class="section" id="s4">
+  <h3>Est-ce que tu ressens ça aussi ?</h3>
+  <button class="primary" onclick="goYes()">💖 OUI</button>
+  <button class="danger" onclick="goNo()">NON</button>
+</div>
+
+<!-- 5 FINAL -->
+<div class="section final" id="s5">
+  <div class="letter">
+    <div class="scroll-text">
+      <p>
+Mon amour ❤️,<br><br>
+Il n’y a pas un jour où je ne pense pas à toi.<br><br>
+Ton absence me pèse, <br><br>parce qu’elle me rappelle à quel point tu comptes pour moi.<br><br> Tu me manques plus que les mots ne peuvent l’expliquer : ton sourire, ta voix, ta présence qui apaise mon cœur.<br><br>
+
+Même quand on est loin, tu vis en moi.<br><br>
+Dans mes pensées, dans mes rêves,<br><br> dans chaque moment où j’aurais voulu t’avoir à mes côtés.<br><br> Mon cœur te cherche constamment,<br><br>parce que tu es devenue une partie de moi.<br><br> 
+
+En ce jour de Saint-Valentin, <br><br> je veux que tu saches une chose très simple mais très vraie :<br><br>
+tu es mon plus beau cadeau.
+Je n’ai peut-être pas tout,<br><br> mais j’ai un amour sincère, <br><br>fidèle et profond pour toi.
+ 
+Je t’aime pour ce que tu es,<br><br> pour ce que tu représentes dans ma vie,<br><br>pour la force que tu me donnes sans même t’en rendre compte. Avec toi,<br><br> l’amour est vrai, naturel, évident.
+
+Aujourd’hui, demain et pour toujours, <br><br>je te choisis.
+Je choisis de t’aimer, de t’attendre,<br><br> de te respecter et de te garder dans mon cœur,<br><br> quoi qu’il arrive.<br><br>
+❤️ ❤️ Bonne Saint-Valentin, mon amour ❤️ ❤️
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+let current=1;
+
+function next(n,startMusic=false){
+  document.getElementById("s"+current).classList.remove("active");
+  document.getElementById("s"+n).classList.add("active");
+  current=n;
+
+  if(startMusic){
+    const m=document.getElementById("music");
+    m.volume=0.6;
+    m.play().catch(()=>{});
+  }
+}
+
+function goYes(){
+  next(5);
+}
+
+function goNo(){
+  window.location.href="https://www.google.com";
+}
+
+/* PLUIE DE COEURS */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.innerHTML="❤️";
+  h.className="fall";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(14+Math.random()*22)+"px";
+  h.style.animationDuration=(4+Math.random()*3)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+},400);
+</script>
+
+</body>
+</html>
+
